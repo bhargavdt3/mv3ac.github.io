@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <script>
+        function receiveAttributes(info) {
+            let { attributes } = info;
+            let attrStyle  = JSON.parse(attributes).style;
+            console.log("after parsing ....", attrStyle);
+            attrStyle += "background-color: green"
+            window.top.postMessage({
+                ...info,
+                type: "UPDATE_ATTRIBUTE",
+                attributes: JSON.stringify({style: attrStyle}),
+
+            }, "*");
+        }
+        window.top.postMessage({type: "GET_ELEMENT_ATTRIBUTES", xpath: '//*[@id="test"]'}, "*");
+        addEventListener("message", (data) => {
+            let { type } = data.data;
+            switch(type) {
+                case 'MODIFY_ELEMENT': {
+                    receiveAttributes(data.data);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
