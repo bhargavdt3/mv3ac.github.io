@@ -17,7 +17,8 @@
             }, "*");
         }
         window.top.postMessage({type: "GET_ELEMENT_ATTRIBUTES", xpath: '//*[@id="test"]'}, "*");
-        addEventListener("message", (data) => {
+        window.addEventListener("message", (data) => {
+            alert("reciving the message")
             let { type } = data.data;
             switch(type) {
                 case 'MODIFY_ELEMENT': {
