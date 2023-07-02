@@ -21,7 +21,7 @@
             console.log("reciving the message", data)
             let { type } = data.data;
             switch(type) {
-                case 'MODIFY_ELEMENT': {
+                case 'GET_ELEMENT_ATTRIBUTES': {
                     receiveAttributes(data.data);
                 }
             }
